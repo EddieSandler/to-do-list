@@ -3,27 +3,44 @@ const taskInput = document.querySelector('input[name="taskname"]');
 
 const resultSection = document.querySelector('#results');
 
-form.addEventListener('submit', function(e) {
-	e.preventDefault();
-	const myTasks = createTask(taskInput.value);
-	resultSection.appendChild(myTasks);
+form.addEventListener('submit', addTask)
 
-});
+function addTask(e){
+e.preventDefault();
+	const myTasks = createTask(taskInput.value);
+	resultSection.append(myTasks);
+}
+
 
 function createTask(text) {
-	const newTask = document.createElement('h2');
+	const newTask = document.createElement('li');
 	newTask.innerText = text;
-	const removeButton = document.createElement("button");
+	const taskList=document.querySelector('#tasklist')
+	taskList.appendChild(newTask)
+
+		const removeButton = document.createElement("button");
 	removeButton.innerText = "Remove";
-	
-	const completedButton = document.createElement("button");
-	completedButton.innerText = "Mark Completed";
+newTask.append(removeButton)
 
-	newTask.append(removeButton)
-	newTask.append(completedButton)
+	removeButton.addEventListener("click", clearTask);
+return newTask
 
-	return newTask;
 }
+ function clearTask(e) {
+	e.preventDefault();
+
+		e.target.parentElement.remove()
+
+	};
+
+
+	// const completedButton = document.createElement("button");
+	// completedButton.innerText = "Mark Completed";
+
+	// newTask.append(removeButton)
+	// newTask.append(completedButton)
+
+
 
 
 //possibly add li for each task
@@ -45,14 +62,13 @@ function createTask(text) {
 //   newLi.innerText = newFriendInput.value;
 //   newButton.innerText = "Remove";
 
-  removeButton.addEventListener("submit", function(event) {
-    event.target.remove();
-  });
+
 
 //   newLi.append(newButton);
 //   friendList.append(newLi);
 //   form.reset();
 // });
+
 
 
 
